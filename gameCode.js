@@ -1,7 +1,7 @@
 function computerPlay(){
 let rockPaperScissors = ["Rock", "Paper", "Scissors"];
 let play= rockPaperScissors[Math.floor(Math.random()*3)];
-console.log(play);
+console.log("computer: " + play);
 return play;
 }
 
@@ -10,18 +10,21 @@ function getUserAnswer(){
     let low=initialAnswer.toLowerCase();
     let hi=initialAnswer.toUpperCase();
     let answer = hi.substring(0,1) + low.substring(1);
-    console.log(answer);
+    console.log("You: " + answer);
     return answer;
 }
 
 function playRound(){
     let userAnswer= getUserAnswer();
     let compAnswer=computerPlay();
-    
-    if(compAnswer===userAnswer){
+    if(userAnswer!="Rock" && userAnswer!="Paper" && userAnswer!="Scissors"){
+        alert("Invalid answer! Try again!");
+        return getUserAnswer();
+    }
+    else if(compAnswer===userAnswer){
         return "Tie";
     }
-    if(compAnswer==="Rock"){
+    else if(compAnswer==="Rock"){
         if(userAnswer==="Paper"){
             return "You win! Paper smothers Rock!"
         }
@@ -29,7 +32,7 @@ function playRound(){
             return "Computer wins! Rock blunts Scissors!"
         }
     }
-    if(compAnswer==="Paper"){
+    else if(compAnswer==="Paper"){
         if(userAnswer==="Rock"){
             return "Computer wins! Paper smothers Rock!"
         }
@@ -37,7 +40,7 @@ function playRound(){
             return "You win! Scissors cut Paper!"
         }
     }
-    if(compAnswer==="Scissors"){
+    else if(compAnswer==="Scissors"){
         if(userAnswer==="Rock"){
             return "You win! Rock blunts Scissors!"
         }
@@ -60,6 +63,7 @@ function playMatch(){
             userScore++;
         }
         console.log(outcome);
+        console.log("Current score - You: " + userScore + ". Computer: " + compScore)
     }
     if(compScore===3){
         console.log("Computer wins by " + compScore + " to " + userScore);
