@@ -7,6 +7,10 @@ return play;
 
 function getUserAnswer(){
     let initialAnswer=prompt("Rock, Paper, or Scissors?", "");
+    if (initialAnswer===null){
+        alert("Game Canceled");
+        return -1;
+    }
     let low=initialAnswer.toLowerCase();
     let hi=initialAnswer.toUpperCase();
     let answer = hi.substring(0,1) + low.substring(1);
@@ -17,9 +21,12 @@ function getUserAnswer(){
 function playRound(){
     let userAnswer= getUserAnswer();
     let compAnswer=computerPlay();
-    if(userAnswer!="Rock" && userAnswer!="Paper" && userAnswer!="Scissors"){
+    if(userAnswer===-1){
+        return -1;
+    }
+    else if(userAnswer!="Rock" && userAnswer!="Paper" && userAnswer!="Scissors"){
         alert("Invalid answer! Try again!");
-        return getUserAnswer();
+       // return getUserAnswer();
     }
     else if(compAnswer===userAnswer){
         return "Tie";
@@ -56,6 +63,12 @@ function playMatch(){
     let userScore=0;
     while(compScore<3&&userScore<3){
         let outcome=playRound();
+        if(outcome===-1){
+            return -1;
+        }
+        else if(outcome===null || outcome===undefined){
+            outcome=playRound();
+        }
         if (outcome.search("Computer")>=0){
             compScore++;
         }
